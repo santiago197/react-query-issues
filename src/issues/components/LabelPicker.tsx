@@ -18,7 +18,6 @@ export const LabelPicker = () => {
         >
             Primary
         </span>
-        
     </div>
   )
 }
