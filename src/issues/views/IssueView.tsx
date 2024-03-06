@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { IssueComment } from '../components/IssueComment';
 import { useIssue } from '../hooks';
 
@@ -13,7 +13,11 @@ export const IssueView = () => {
 	const params = useParams();
 	const { id = '0' } = params;
 
-	const query = useIssue(+id);
+	const { issueQuery } = useIssue(+id);
+
+	if (issueQuery.isLoading) return <p>Loading...</p>;
+
+	if (!issueQuery.data) return <Navigate to="./issues/list" />;
 
 	return (
 		<div className="row mb-5">
@@ -21,12 +25,13 @@ export const IssueView = () => {
 				<Link to="./issues/list">Go Back</Link>
 			</div>
 
+			<IssueComment issue={issueQuery.data!} />
+
 			{/* Primer comentario */}
-			<IssueComment body={comment1} />
 
 			{/* Comentario de otros */}
-			<IssueComment body={comment2} />
-			<IssueComment body={comment3} />
+			{/* <IssueComment body={comment2} />
+			<IssueComment body={comment3} /> */}
 		</div>
 	);
 };
