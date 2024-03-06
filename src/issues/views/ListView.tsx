@@ -1,18 +1,18 @@
 import { IssueList } from '../components/IssueList';
 import { LabelPicker } from '../components/LabelPicker';
-
+import { useIssues } from '../hooks/useIssues';
 
 export const ListView = () => {
-  return (
-    <div className="row mt-5">
-      
-      <div className="col-8">
-        <IssueList />
-      </div>
-      
-      <div className="col-4">
-        <LabelPicker />
-      </div>
-    </div>
-  )
-}
+	const { issuesQuery } = useIssues();
+	return (
+		<div className="row mt-5">
+			<div className="col-8">
+				{issuesQuery.isLoading ? <p>Loading...</p> : <IssueList />}
+			</div>
+
+			<div className="col-4">
+				<LabelPicker />
+			</div>
+		</div>
+	);
+};
