@@ -29,6 +29,7 @@ export const IssueView = () => {
 			</div>
 
 			<IssueComment issue={issueQuery.data!} />
+			{commentsQuery.isLoading && <LoadingIcon />}
 
 			{/* Primer comentario */}
 			{commentsQuery.data?.map((issue) => (
