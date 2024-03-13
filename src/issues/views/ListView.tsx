@@ -1,3 +1,4 @@
+import { LoadingIcon } from '../../shared/components/LoadingIcon';
 import { IssueList } from '../components/IssueList';
 import { LabelPicker } from '../components/LabelPicker';
 import { useIssues } from '../hooks/useIssues';
@@ -8,7 +9,7 @@ export const ListView = () => {
 		<div className="row mt-5">
 			<div className="col-8">
 				{issuesQuery.isLoading ? (
-					<p>Loading...</p>
+					<LoadingIcon />
 				) : (
 					<IssueList issues={issuesQuery.data || []} />
 				)}
